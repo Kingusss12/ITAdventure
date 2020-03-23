@@ -67,6 +67,7 @@ public class Player : MonoBehaviour
         lives--;
         if (lives <= 0)
         {
+            lives = 5;
             SceneManager.LoadScene("World");
             print("Game Over");
         }

@@ -55,4 +55,11 @@ public class HelpScript : MonoBehaviour
         }
     }
 
+    public void Open()
+    {
+       IsUnlocked = true;
+        HelpPanel.gameObject.SetActive(true);
+       HelpText.gameObject.SetActive(true);
+    }
+
 }

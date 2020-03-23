@@ -16,6 +16,7 @@ public class LevelOrderManagement : MonoBehaviour
 
     public List<Collider2D> Elements = new List<Collider2D>();
     public GateScript NextGate;
+    public HelpScript Help;
     private int progress;
 
     public void Start()
@@ -37,6 +38,8 @@ public class LevelOrderManagement : MonoBehaviour
                 if (!NextGate.IsOpen)
                 {
                     NextGate.Open();
+                    Help.Open();
+
                 }
             }
         }
