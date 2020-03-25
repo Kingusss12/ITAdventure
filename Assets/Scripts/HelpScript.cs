@@ -13,11 +13,6 @@ public class HelpScript : MonoBehaviour
   
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -58,8 +53,10 @@ public class HelpScript : MonoBehaviour
     public void Open()
     {
        IsUnlocked = true;
-        HelpPanel.gameObject.SetActive(true);
+       HelpPanel.gameObject.SetActive(true);
+       unlockText.gameObject.SetActive(false);
        HelpText.gameObject.SetActive(true);
+
     }
 
 }

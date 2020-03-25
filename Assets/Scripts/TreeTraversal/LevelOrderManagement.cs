@@ -18,6 +18,7 @@ public class LevelOrderManagement : MonoBehaviour
     public GateScript NextGate;
     public HelpScript Help;
     private int progress;
+    private static int helpProgress = 0;
 
     public void Start()
     {
@@ -39,7 +40,7 @@ public class LevelOrderManagement : MonoBehaviour
                 {
                     NextGate.Open();
                     Help.Open();
-
+                    helpProgress++;
                 }
             }
         }
