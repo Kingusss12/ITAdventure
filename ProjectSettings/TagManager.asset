@@ -11,8 +11,13 @@ TagManager:
   - GameManager
   - Help
   - binarySearchTree
-  - Diamond
   - sort
+  - DiamondTreeTraversal
+  - DiamondBinarySearchTree
+  - DiamondSort
+  - DiamondStack
+  - DiamondQueue
+  - DiamondLinkedList
   layers:
   - Default
   - TransparentFX

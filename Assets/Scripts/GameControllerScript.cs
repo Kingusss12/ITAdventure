@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameControllerScript : MonoBehaviour
 {
 
-    public GameObject escapeCanvas;
+    public GameObject escapeCanvas, DiamondTreeTraversal, DiamondBinarySearchTree, DiamondSort, DiamondStack, DiamondQueue, DiamondLinkedList;
    
 
     // Update is called once per frame
@@ -17,6 +17,18 @@ public class GameControllerScript : MonoBehaviour
         {
             escapeCanvas.gameObject.SetActive(true);
         }
+        if (Player.Instance.treeTraversal)
+        {
+            DiamondTreeTraversal.gameObject.SetActive(true);
+        }
+        if (Player.Instance.binarySearchTree)
+        {
+            DiamondBinarySearchTree.gameObject.SetActive(true);
+        }
+        if (Player.Instance.sort)
+        {
+            DiamondSort.gameObject.SetActive(true);
+        }
     }
 
     /*
@@ -26,7 +38,9 @@ Saves player's data's like Live and coin amount to a binary file and navigates b
 
     public void SavePlayer()
     {
-        SaverScript.SavePlayer(Player.Instance.lives, Player.Instance.coins, Player.Instance.treeTraversal);
+        SaverScript.SavePlayer(Player.Instance.lives, Player.Instance.coins, Player.Instance.treeTraversal,
+            Player.Instance.binarySearchTree, Player.Instance.sort, Player.Instance.stack, 
+            Player.Instance.queue, Player.Instance.linkedList);
         escapeCanvas.gameObject.SetActive(false);
         SceneManager.LoadScene("MainScreen");
 
