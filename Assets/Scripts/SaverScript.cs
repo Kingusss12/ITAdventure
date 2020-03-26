@@ -6,13 +6,13 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 public static class SaverScript  {
 
-    public static void SavePlayer (int coins,int lives)
+    public static void SavePlayer(int coins, int lives, bool treeTraversal)
     {
         BinaryFormatter formatter = new BinaryFormatter();
         string path = Application.persistentDataPath + "/player.bin";
         FileStream stream = new FileStream(path, FileMode.Create);
 
-        PlayerData data = new PlayerData(coins,lives);
+        PlayerData data = new PlayerData(coins,lives, treeTraversal);
 
         formatter.Serialize(stream, data);
         stream.Close();

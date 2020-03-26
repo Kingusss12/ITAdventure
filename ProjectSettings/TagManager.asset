@@ -11,6 +11,8 @@ TagManager:
   - GameManager
   - Help
   - binarySearchTree
+  - Diamond
+  - sort
   layers:
   - Default
   - TransparentFX

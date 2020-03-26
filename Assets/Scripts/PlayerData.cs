@@ -2,13 +2,14 @@
 public class PlayerData
 {
     public int Coins, Lives;
-    public bool gameIsSaved;
+    public bool TreeTraversal;
 
-    public PlayerData(int lives, int coins)
+    public PlayerData(int lives, int coins, bool treeTraversal)
     {
 
         Coins = coins;
         Lives = lives;
+        TreeTraversal = treeTraversal;
 
     }
 

@@ -635,7 +635,7 @@ PrefabInstance:
     - target: {fileID: 8107083360636722594, guid: d88e201d9eccc04408eb429350b434ab,
         type: 3}
       propertyPath: m_Name
-      value: 
+      value: Coins and Lives
       objectReference: {fileID: 0}
     - target: {fileID: 8107083360636722598, guid: d88e201d9eccc04408eb429350b434ab,
         type: 3}

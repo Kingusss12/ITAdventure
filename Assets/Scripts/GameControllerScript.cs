@@ -13,7 +13,7 @@ public class GameControllerScript : MonoBehaviour
     void Update()
     {
         //If player push the "escape button, the player goes back to the MainScreen(Main Menu)"
-        if (Input.GetKey("escape"))
+        if (Input.GetKey(KeyCode.Escape))
         {
             escapeCanvas.gameObject.SetActive(true);
         }
@@ -26,7 +26,7 @@ Saves player's data's like Live and coin amount to a binary file and navigates b
 
     public void SavePlayer()
     {
-        SaverScript.SavePlayer(Player.Instance.lives, Player.Instance.coins);
+        SaverScript.SavePlayer(Player.Instance.lives, Player.Instance.coins, Player.Instance.treeTraversal);
         escapeCanvas.gameObject.SetActive(false);
         SceneManager.LoadScene("MainScreen");
 

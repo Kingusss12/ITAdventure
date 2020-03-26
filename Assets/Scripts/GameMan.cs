@@ -11,7 +11,7 @@ public class GameMan : MonoBehaviour
     void Update()
     {
         //If player push the "escape button, the player goes back to the MainScreen(Main Menu)"
-        if (Input.GetKey("escape"))
+        if (Input.GetKey(KeyCode.Escape))
         {
             escapeCanvas.gameObject.SetActive(true);
         }
