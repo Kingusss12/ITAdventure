@@ -52,11 +52,13 @@ public class HelpScript : MonoBehaviour
 
     public void Open()
     {
-       IsUnlocked = true;
-       HelpPanel.gameObject.SetActive(true);
-       unlockText.gameObject.SetActive(false);
-       HelpText.gameObject.SetActive(true);
-
+        if (!IsUnlocked)
+        {
+            IsUnlocked = true;
+            HelpPanel.gameObject.SetActive(true);
+            unlockText.gameObject.SetActive(false);
+            HelpText.gameObject.SetActive(true);
+        }
     }
 
 }

@@ -11,7 +11,7 @@ public class SceneLoaderScript : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
-        PlayerData = new PlayerData(5, 0);
+        PlayerData = new PlayerData(5, 50);
 
     }
 

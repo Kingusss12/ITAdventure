@@ -7,24 +7,6 @@ public class GameMan : MonoBehaviour
 {
     public GameObject escapeCanvas;
 
-    //private static GameMan instance;
-    //public Vector2 lastCheckpointPose;
-
-    // void Awake()
-    //{
-    //    if (instance == null)
-    //    {
-    //        instance = this;
-    //        DontDestroyOnLoad(instance);
-    //    }
-    //    else
-    //    {
-    //        DestroyObject(gameObject);
-    //    }
-   
-    //}
-
-
     // Update is called once per frame
     void Update()
     {

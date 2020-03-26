@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/BinarySearchTree.unity
     guid: f88164db34cc54d44a08e36e17dfa398
+  - enabled: 1
+    path: Assets/Scenes/Sort.unity
+    guid: ad619bb0be4b9d245817fbdd64a0b71f
   m_configObjects: {}
