@@ -40,8 +40,10 @@ Saves player's data's like Live and coin amount to a binary file and navigates b
     {
         SaverScript.SavePlayer(Player.Instance.lives, Player.Instance.coins, Player.Instance.treeTraversal,
             Player.Instance.binarySearchTree, Player.Instance.sort, Player.Instance.stack, 
-            Player.Instance.queue, Player.Instance.linkedList);
+            Player.Instance.queue, Player.Instance.linkedList, Player.Instance.gameIsSaved);
+
         escapeCanvas.gameObject.SetActive(false);
+        Player.Instance.gameIsSaved = true;
         SceneManager.LoadScene("MainScreen");
 
     }

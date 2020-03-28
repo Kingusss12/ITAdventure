@@ -18,6 +18,16 @@ TagManager:
   - DiamondStack
   - DiamondQueue
   - DiamondLinkedList
+  - 3
+  - 2
+  - 5
+  - 4
+  - 9
+  - 1
+  - 7
+  - 6
+  - 10
+  - 8
   layers:
   - Default
   - TransparentFX

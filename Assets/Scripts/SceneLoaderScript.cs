@@ -7,11 +7,23 @@ public class SceneLoaderScript : MonoBehaviour
 {
     public static SceneLoaderScript Instance;
     public PlayerData PlayerData;
+    public GameObject loadButton, newGameButton, oldStartButton;
+
+    private void Update()
+    {
+        if(Player.Instance.gameIsSaved)
+        {
+            loadButton.SetActive(true);
+            newGameButton.SetActive(true);
+            Destroy(oldStartButton);
+        }
+    }
+
 
     public void Play()
     {
         SceneManager.LoadScene(1);
-        PlayerData = new PlayerData(5, 50, false, false, false, false, false, false);
+        PlayerData = new PlayerData(5, 50, false, false, false, false, false, false, false);
 
     }
 

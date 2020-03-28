@@ -8,7 +8,7 @@ public class Player : MonoBehaviour
     public static Player Instance;
     float runSpeed,jumpSpeed, moveX;
     public int lives, coins;
-    public bool treeTraversal, binarySearchTree, sort, stack, queue, linkedList;
+    public bool treeTraversal, binarySearchTree, sort, stack, queue, linkedList, gameIsSaved;
     bool isGrounded = true;
     Rigidbody2D rb;
     public Transform Checkpoint;
@@ -25,6 +25,8 @@ public class Player : MonoBehaviour
         stack = SceneLoaderScript.Instance.PlayerData.Stack;
         queue = SceneLoaderScript.Instance.PlayerData.Queue;
         linkedList = SceneLoaderScript.Instance.PlayerData.LinkedList;
+        gameIsSaved = SceneLoaderScript.Instance.PlayerData.GameIsSaved;
+
     }
 
 
@@ -94,6 +96,7 @@ public class Player : MonoBehaviour
         SceneLoaderScript.Instance.PlayerData.Stack = stack;
         SceneLoaderScript.Instance.PlayerData.Queue = queue;
         SceneLoaderScript.Instance.PlayerData.LinkedList = linkedList;
+        SceneLoaderScript.Instance.PlayerData.GameIsSaved = gameIsSaved;
     }
 }
 

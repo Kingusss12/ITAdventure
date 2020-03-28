@@ -2,9 +2,9 @@
 public class PlayerData
 {
     public int Coins, Lives;
-    public bool TreeTraversal, BinarySearchTree, Sort, Queue, Stack, LinkedList;
+    public bool TreeTraversal, BinarySearchTree, Sort, Queue, Stack, LinkedList, GameIsSaved;
 
-    public PlayerData(int lives, int coins, bool treeTraversal, bool binarySearchTree, bool sort, bool stack, bool queue, bool linkedList)
+    public PlayerData(int lives, int coins, bool treeTraversal, bool binarySearchTree, bool sort, bool stack, bool queue, bool linkedList, bool gameIsSaved)
     {
 
         Coins = coins;
@@ -15,6 +15,7 @@ public class PlayerData
         Stack = stack;
         Queue = queue;
         LinkedList = linkedList;
+        GameIsSaved = gameIsSaved;
 
     }
 

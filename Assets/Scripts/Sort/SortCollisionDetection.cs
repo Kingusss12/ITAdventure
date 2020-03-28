@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-This script detects the collision of sprites with the player
-Stores collised gameobjects to a list and increase the index of the array
-*/
-public class CollisionDetection : MonoBehaviour
+public class SortCollisionDetection : MonoBehaviour
 {
     public UnityEngine.Events.UnityEvent OnCollision;
     private bool wasTouched = false;
+    Vector2 originalPos;
+
+    private void Start()
+    {
+        originalPos = new Vector2(transform.position.x, transform.position.y);
+    }
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-        if (wasTouched)
-           return;
+        //if (wasTouched)
+        //    return;
         wasTouched = true;
         OnCollision.Invoke();
     }
@@ -23,6 +25,8 @@ public class CollisionDetection : MonoBehaviour
     {
         wasTouched = false;
         GetComponent<Renderer>().material.color = Color.white;
+        transform.position = originalPos;
     }
+
 
 }
