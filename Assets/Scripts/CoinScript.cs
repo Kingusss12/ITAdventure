@@ -10,6 +10,7 @@ public class CoinScript : MonoBehaviour
         {
             Player.Instance.coins++;
             Destroy(gameObject);
+            AudioManager.playCoinCollected();
         }
     }
 

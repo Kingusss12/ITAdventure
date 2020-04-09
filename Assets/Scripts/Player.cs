@@ -61,13 +61,21 @@ public class Player : MonoBehaviour
         
         if (moveX > 0)
         {
+            if (PickedUpObject)
+            {
+                PickedUpObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+            }
             transform.localScale = new Vector3(scaleX, scaleY, 0.1f); 
         }
         else if (moveX < 0)
         {
-   
-            transform.localScale = new Vector3(-scaleX, scaleY, 0.1f);
-            if(PickedUpObject) PickedUpObject.transform.localRotation = Quaternion.Euler(0, 180f, 0); ;
+
+            if (PickedUpObject)
+            {
+                
+                     PickedUpObject.transform.rotation = Quaternion.Euler(0, 180, 0);
+            }
+                transform.localScale = new Vector3(-scaleX, scaleY, 0.1f);
         }
 
 
