@@ -17,14 +17,14 @@ public class CameraFollow : MonoBehaviour
     private Vector3 velocity;
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         //cameras start position
         Vector3 cameraPosition = transform.position;
         //players current position
         Vector3 playerPosition = player.transform.position;
         playerPosition.x += 1f;
-        playerPosition.y += 1.5f;
+        playerPosition.y += 4f;
         playerPosition.z = -10;
 
 

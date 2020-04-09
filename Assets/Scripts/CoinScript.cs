@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
-
     void OnTriggerEnter2D(Collider2D obj)
     {
-      //  print("Coin collised");
-        Player.Instance.coins += 1;
-        Destroy(gameObject);
-
+        if(obj.gameObject.tag == "Player")
+        {
+            Player.Instance.coins++;
+            Destroy(gameObject);
+        }
     }
 
+    //protected override void HandleUse(Player player)
+    //{
+    //    base.HandleUse(player);
+    //    player.presistentData.Coins++;
+    //}
 }

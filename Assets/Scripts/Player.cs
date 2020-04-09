@@ -5,14 +5,21 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    public static Player Instance;
-    float runSpeed,jumpSpeed, moveX;
     public int lives, coins;
     public bool treeTraversal, binarySearchTree, sort, stack, queue, linkedList, gameIsSaved;
+    public static Player Instance;
+    float runSpeed,jumpSpeed, moveX;
     bool isGrounded = true;
     Rigidbody2D rb;
     public Transform Checkpoint;
-    public Transform Sprite;
+    private Vector3 localScale;
+    public float scaleX, scaleY;
+    public Vector2 PickupOffset;
+    public ContactFilter2D CollisionDetection;
+    public GameItem PickedUpObject;
+    public Objective Objective;
+
+    private Animator anim;
 
     private void Awake()
     {
@@ -26,40 +33,87 @@ public class Player : MonoBehaviour
         queue = SceneLoaderScript.Instance.PlayerData.Queue;
         linkedList = SceneLoaderScript.Instance.PlayerData.LinkedList;
         gameIsSaved = SceneLoaderScript.Instance.PlayerData.GameIsSaved;
-
     }
 
 
     // Start is called before the first frame update
     void Start()
     {
-        runSpeed = 5;
-        jumpSpeed = 440;
+        runSpeed = 2.5f;
+        jumpSpeed = 500;
         rb = GetComponent<Rigidbody2D>();
+        anim = gameObject.GetComponent<Animator>();
+        localScale = transform.localScale;
     }
 
     // Update is called once per frame
     void Update()
     {
-        moveX = Input.GetAxis("Horizontal");
-        rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
+        moveX = Input.GetAxisRaw("Horizontal") * runSpeed;
+
+
+        //if character moves on the X axis -> set animation to Walk
+        if (Mathf.Abs(moveX) > 0 && rb.velocity.y == 0)
+        {
+            anim.SetBool("isWalking", true);
+        }
+        else anim.SetBool("isWalking", false);
+        
         if (moveX > 0)
         {
-            Sprite.localScale = new Vector3(-1f, 1f, 1f);
+            transform.localScale = new Vector3(scaleX, scaleY, 0.1f); 
         }
         else if (moveX < 0)
         {
-            Sprite.localScale = new Vector3(1f, 1f, 1f);
+   
+            transform.localScale = new Vector3(-scaleX, scaleY, 0.1f);
+            if(PickedUpObject) PickedUpObject.transform.localRotation = Quaternion.Euler(0, 180f, 0); ;
         }
+
+
+        if (rb.velocity.y == 0)
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", false);
+        }
+
+        if (rb.velocity.y < 0)
+        {
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", true);
+        }
+        if (rb.velocity.y > 0) anim.SetBool("isJumping", true);
+
         //Jumping, player will able to jump after touching the ground
         if (Input.GetKeyDown(KeyCode.Space) && isGrounded)
         {
             rb.AddForce(transform.up * jumpSpeed);
             isGrounded = false;
         }
-        
+
+        List<Collider2D> objects = new List<Collider2D>();
+        rb.OverlapCollider(CollisionDetection, objects);
+        foreach (var obj in objects)
+        {
+            GameItem objScript = obj.GetComponent<GameItem>();
+            if (objScript && objScript.CanUse && (objScript.AutoUse || Input.GetKeyDown(KeyCode.E)))
+            {
+                objScript.Use(this);
+                if (objScript.PickupOnUse)
+                {
+                    PickedUpObject = objScript;
+                    PickedUpObject.transform.SetParent(transform);
+                    PickedUpObject.transform.localPosition = PickupOffset;
+                 }
+                  return;
+            }
+        }
     }
 
+    private void FixedUpdate()
+    {
+        rb.velocity = new Vector2(moveX * runSpeed, rb.velocity.y);
+    }
 
     void OnCollisionEnter2D(Collision2D col)
     {
@@ -77,13 +131,23 @@ public class Player : MonoBehaviour
         if (lives <= 0)
         {
             SceneManager.LoadScene("World");
-            lives = 5;
             print("Game Over");
         }
         else
         {
-            transform.position = Checkpoint.position;
+
+            if ("BinarySearchTree" == SceneManager.GetActiveScene().name)
+            {
+                Objective.Reset();
+                transform.position = Checkpoint.position;
+            }
+            else transform.position = Checkpoint.position;
         }
+    }
+
+    public void SetObjective(Objective newObjective)
+    {
+        Objective = newObjective;
     }
 
     public void OnDestroy()

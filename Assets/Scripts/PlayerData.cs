@@ -1,4 +1,8 @@
-﻿[System.Serializable] //save it in file
+﻿using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using UnityEngine;
+
+[System.Serializable] //save it in file
 public class PlayerData
 {
     public int Coins, Lives;
@@ -20,5 +24,6 @@ public class PlayerData
     }
 
 
+    
 }
 
