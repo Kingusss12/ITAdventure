@@ -32,6 +32,10 @@ TagManager:
   - linkedList
   - queue
   - Hole
+  - EnemyBody
+  - Turn
+  - EnemyTop
+  - MovingStick
   layers:
   - Default
   - TransparentFX

@@ -125,11 +125,15 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Ground"  || col.gameObject.tag == "GameController" || col.gameObject.tag == "Help")
+        if(col.gameObject.tag == "Ground"  || col.gameObject.tag == "GameController" || col.gameObject.tag == "Help" )
         {
+
             if (col.relativeVelocity.y > 0)
                 isGrounded = true;
         }
+
+
+
 
     }
 
@@ -170,5 +174,6 @@ public class Player : MonoBehaviour
         SceneLoaderScript.Instance.PlayerData.LinkedList = linkedList;
         SceneLoaderScript.Instance.PlayerData.GameIsSaved = gameIsSaved;
     }
+
 }
 
