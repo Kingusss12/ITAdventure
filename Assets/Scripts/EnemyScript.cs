@@ -7,23 +7,37 @@ public class EnemyScript : MonoBehaviour
     public Vector2 localScale;
 
     public float speed;
-
-    public bool MoveLeft;
+    
+    public bool dirY, MoveLeft;
 
 
 
     // Update is called once per frame
     void Update()
     {
-        if (MoveLeft)
+        if (dirY)
         {
-            transform.Translate(2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(-localScale.x, localScale.y);
+            if (MoveLeft)
+            {
+                transform.Translate(0, 2 * Time.deltaTime * speed, 0);
+            }
+            else
+            {
+                transform.Translate(0, -2 * Time.deltaTime * speed, 0);
+            }
         }
         else
         {
-            transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
-            transform.localScale = new Vector2(localScale.x, localScale.y);
+            if (MoveLeft)
+            {
+                transform.Translate(2 * Time.deltaTime * speed, 0, 0);
+                transform.localScale = new Vector2(-localScale.x, localScale.y);
+            }
+            else
+            {
+                transform.Translate(-2 * Time.deltaTime * speed, 0, 0);
+                transform.localScale = new Vector2(localScale.x, localScale.y);
+            }
         }
 
         CheckForDestroy();
@@ -52,10 +66,16 @@ public class EnemyScript : MonoBehaviour
     }
     public void CheckForDestroy()
     {
-        Debug.Log(transform.childCount);
-        if (transform.childCount <= 5)
-            Destroy(gameObject);
-            
+        if (dirY)
+        {
+            if (transform.childCount <= 7)
+                Destroy(gameObject);
+        }
+        else
+        {
+            if (transform.childCount <= 5)
+                Destroy(gameObject);
+        }
     }
 
 

@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class CoinScript : MonoBehaviour
 {
+    
+
+    private void Start()
+    {
+        Animator anim = GetComponent<Animator>();
+        anim.Play("CoinRotation",0, Random.Range(0.0f,1f));
+    }
+
     void OnTriggerEnter2D(Collider2D obj)
     {
         if(obj.gameObject.tag == "Player")

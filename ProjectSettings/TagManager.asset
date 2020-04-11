@@ -35,7 +35,7 @@ TagManager:
   - EnemyBody
   - Turn
   - EnemyTop
-  - MovingStick
+  - MovingPlatform
   layers:
   - Default
   - TransparentFX

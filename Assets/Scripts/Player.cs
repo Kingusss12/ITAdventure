@@ -125,16 +125,28 @@ public class Player : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D col)
     {
-        if(col.gameObject.tag == "Ground"  || col.gameObject.tag == "GameController" || col.gameObject.tag == "Help" )
+        if(col.gameObject.tag == "Ground"  || col.gameObject.tag == "GameController" || col.gameObject.tag == "Help" || col.gameObject.tag == "MovingPlatform" )
         {
 
             if (col.relativeVelocity.y > 0)
                 isGrounded = true;
         }
+    }
 
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = collision.transform;
+        }
+    }
 
-
-
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.gameObject.tag == "MovingPlatform")
+        {
+            transform.parent = null;
+        }
     }
 
     public void Die()
@@ -148,7 +160,12 @@ public class Player : MonoBehaviour
         else
         {
 
-            if ("BinarySearchTree" == SceneManager.GetActiveScene().name)
+            if ("BinarySearchTree" == SceneManager.GetActiveScene().name )
+            {
+                Objective.Reset();
+                transform.position = Checkpoint.position;
+            }
+            if ("Stack" == SceneManager.GetActiveScene().name)
             {
                 Objective.Reset();
                 transform.position = Checkpoint.position;
