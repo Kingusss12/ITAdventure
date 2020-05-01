@@ -14,24 +14,21 @@ public class SortOrderManagement : MonoBehaviour
     public Text Num1, Num2;
     public int progress;
 
-    Color[] colors = new Color[5];
+    public Text wrongStep;
+
+    Color lightGreen;
 
     public void Start()
     {
-
-        colors[0] = Color.green;
-        colors[1] = new Color(0.436f, 0.849f, 0.442f);
-        colors[2] = new Color(0.32f, 0.88f, 0.28f);
-        colors[3] = new Color(0.37f, 0.77f, 0.34f);
-        colors[4] = new Color(0.23f, 0.68f, 0.19f);
+        lightGreen = new Color(0.436f, 0.849f, 0.442f);
     }
 
     public void OnTouch(Collider2D obj)
     {
         if (Elements[progress] == obj)
         {
-            obj.GetComponent<Renderer>().material.color = colors[Random.Range(0, colors.Length)];
-
+            AudioManager.playGoodStep();
+            obj.GetComponent<Renderer>().material.color = lightGreen;
             if (progress % 2 > 0)
             {
                 bool earlier = obj.transform.localPosition.x < Elements[progress - 1].transform.localPosition.x;
@@ -50,20 +47,11 @@ public class SortOrderManagement : MonoBehaviour
                         eScript.OnCollisionLeave.RemoveAllListeners();
                     });
                 }
-               /* if (int.Parse(obj.gameObject.tag) < int.Parse(Elements[progress - 1].gameObject.tag))
-                {
-
-
-                }
-                if (!(int.Parse(obj.gameObject.tag) == int.Parse(Elements[progress - 1].gameObject.tag)))
-                {
-                    print("Comparison:" + int.Parse(Elements[progress - 1].gameObject.tag) + " - " + int.Parse(obj.gameObject.tag));
-                    Comparison.SetActive(true);
-                    Num1.text = Elements[progress - 1].gameObject.tag.ToString();
-                    Num2.text = Elements[progress].gameObject.tag.ToString();
-                }*/
                 obj.GetComponent<Renderer>().sharedMaterial.color = Color.white;
                 Elements[progress - 1].GetComponent<Renderer>().sharedMaterial.color = Color.white;
+                Comparison.SetActive(true);   
+                Num1.text = Elements[progress - 1].gameObject.tag.ToString();
+                Num2.text = obj.gameObject.tag.ToString();
             }
             else
             {
@@ -76,6 +64,8 @@ public class SortOrderManagement : MonoBehaviour
                 Comparison.SetActive(false);
                 if (!NextGate.IsOpen)
                 {
+                    Num1 = null;
+                    Num2 = null;
                     NextGate.Open();
                     Help.Open();
                 }
@@ -83,11 +73,12 @@ public class SortOrderManagement : MonoBehaviour
         }
         else
         {
-            Debug.Log(obj.gameObject.name);
-            Debug.Log(Elements[progress--].gameObject.name);
+            StartCoroutine(WrongStep());
             Player.Instance.Die();
             progress = 0;
-             //Comparison.SetActive(false);
+            Num1.text = null;
+            Num2.text = null;
+            Comparison.SetActive(false);
             for (int i = 0; i < Elements.Count; i++)
             {
                 Elements[i].GetComponent<SortCollisionDetection>().Reset();
@@ -105,15 +96,11 @@ public class SortOrderManagement : MonoBehaviour
 
     }
 
-    private void OnLeave()
+    public IEnumerator WrongStep()
     {
-
-    }
-
-    private void SwapItem(Transform t1, Transform t2)
-    {
-        Vector3 pos = t1.localPosition;
-        t1.localPosition = t2.localPosition;
-        t2.localPosition = pos;
+        AudioManager.playWrongStep();
+        wrongStep.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        wrongStep.gameObject.SetActive(false);
     }
 }

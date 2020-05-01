@@ -42,23 +42,39 @@ public class ItemSlot : GameItem
         }
     }
 
-    protected override void HandleUse(Player player)
+    public override void Use(Player player)
     {
         Player p = Player.Instance;
-        GameItem obj = p.PickedUpObject;
-        if (Slot)
-        {
-            Slot.transform.SetParent(p.transform);
-            Slot.transform.localPosition = p.PickupOffset;
-        }
-        p.PickedUpObject = Slot;
-        Slot = obj;
+        Slot = p.Pickup(Slot);
         if (Slot)
         {
             Slot.transform.SetParent(transform);
+            //bebiztosítja ez az if, hogy ne tukorfordításba tegye vissza az itemeket a játékos a slotba
+            if (Slot.transform.localScale.x <= 1)
+            {
+                Slot.transform.localScale = new Vector3(1, 1,1);
+                if (Slot.transform.localRotation.z <= 0)
+                {
+                    Slot.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                }
+
+            }
+            if (Slot.transform.localScale.x >= 0)
+            {
+                Slot.transform.localScale = new Vector3(1, 1, 1);
+                if (Slot.transform.localRotation.z >= 0)
+                {
+                    Slot.transform.localRotation = Quaternion.Euler(0.0f, 0.0f, 0.0f);
+                }
+
+            }
             Slot.transform.localPosition = Vector3.zero;
             if (CheckCompatibility(Slot))
+            {
                 p.Die();
+            }
+            else
+                base.Use(player);
         }
     }
 

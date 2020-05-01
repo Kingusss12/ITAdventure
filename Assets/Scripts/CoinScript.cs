@@ -5,18 +5,18 @@ using UnityEngine;
 public class CoinScript : MonoBehaviour
 {
     
-
     private void Start()
     {
         Animator anim = GetComponent<Animator>();
         anim.Play("CoinRotation",0, Random.Range(0.0f,1f));
     }
 
-    void OnTriggerEnter2D(Collider2D obj)
+
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(obj.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            Player.Instance.coins++;
+            Player.Instance.presistentData.Coins++;
             Destroy(gameObject);
             AudioManager.playCoinCollected();
         }
@@ -26,5 +26,7 @@ public class CoinScript : MonoBehaviour
     //{
     //    base.HandleUse(player);
     //    player.presistentData.Coins++;
+    //    AudioManager.playCoinCollected();
+
     //}
 }

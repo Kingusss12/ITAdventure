@@ -11,8 +11,8 @@ public class LevelManager : MonoBehaviour
 {
 
     public GameObject TreeTraversal, BinarySearchTree, Sort, Stack, LinkedList, Queue;
-    public GameObject level1, level2, level3, level4, level5, level6, level7;
-    public GameObject level1Shine, level2Shine, level3Shine, level4Shine, level5Shine, level6Shine, bonusShine;
+    public GameObject level1, level2, level3, level4, level5, level6;
+    public GameObject level1Shine, level2Shine, level3Shine, level4Shine, level5Shine, level6Shine;
     private bool treeTraversal = false;
     private bool binarySearchTree = false;
     private bool sort = false;
@@ -37,36 +37,42 @@ public class LevelManager : MonoBehaviour
             case "treeTraversal":
                 treeTraversal = true;
                 TreeTraversal.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level1.SetActive(false);
                 level1Shine.SetActive(true);
                 break;
             case "binarySearchTree":
                 binarySearchTree = true;
                 BinarySearchTree.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level2Shine.SetActive(true);
                 level2.SetActive(false);
                 break;
             case "sort":
                 sort = true;
                 Sort.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level3Shine.SetActive(true);
                 level3.SetActive(false);
                 break;
             case "stack":
                 stack = true;
                 Stack.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level4Shine.SetActive(true);
                 level4.SetActive(false);
                 break;
             case "linkedList":
                 linkedlist = true;
                 LinkedList.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level5Shine.SetActive(true);
                 level5.SetActive(false);
                 break;
             case "queue":
                 queue = true;
                 Queue.gameObject.SetActive(true);
+                AudioManager.playButtonClick();
                 level6Shine.SetActive(true);
                 level6.SetActive(false);
                 break;
@@ -75,7 +81,7 @@ public class LevelManager : MonoBehaviour
         }       
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    void OnTriggerExit2D(Collider2D collision)
     {
         switch (collision.gameObject.tag)
         {
@@ -122,11 +128,13 @@ public class LevelManager : MonoBehaviour
 
     private void GoToLevel()
     {
+        AudioManager.playSelect();
         if (treeTraversal)  SceneManager.LoadScene("TreeTraversal");
         if (binarySearchTree)   SceneManager.LoadScene("BinarySearchTree");
         if (sort)   SceneManager.LoadScene("Sort");
         if (stack) SceneManager.LoadScene("Stack");
         if (queue) SceneManager.LoadScene("Queue");
+        if (linkedlist) SceneManager.LoadScene("LinkedList");
     }
 
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 /*
@@ -18,18 +19,16 @@ public class LevelOrderManagement : MonoBehaviour
     public GateScript NextGate;
     public HelpScript Help;
     private int progress;
-    private static int helpProgress = 0;
 
-    public void Start()
-    {
+    public Text wrongStep;
 
-    }
 
     public void OnTouch(Collider2D obj)
     {
         if (Elements[progress] == obj)
         {
             obj.GetComponent<Renderer>().material.color = Color.green;
+            AudioManager.playGoodStep();
             progress++;
             if (progress == Elements.Count)
             {
@@ -37,12 +36,12 @@ public class LevelOrderManagement : MonoBehaviour
                 {
                     NextGate.Open();
                     Help.Open();
-                    helpProgress++;
                 }
             }
         }
         else
         {
+            StartCoroutine(WrongStep());
             Player.Instance.Die();
             progress = 0;
             for (int i = 0; i < Elements.Count; i++)
@@ -53,9 +52,11 @@ public class LevelOrderManagement : MonoBehaviour
         }
     }
 
-    private void Update()
+    public IEnumerator WrongStep()
     {
-
-
+        AudioManager.playWrongStep();
+        wrongStep.gameObject.SetActive(true);
+        yield return new WaitForSeconds(1f);
+        wrongStep.gameObject.SetActive(false);
     }
 }

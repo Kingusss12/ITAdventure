@@ -13,20 +13,11 @@ public class GateScript : MonoBehaviour
         get;
         private set;
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        //anim = gameObject.GetComponent<Animator>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+ 
 
     public void Open()
     {
+        AudioManager.playGateOpen();
         IsOpen = true;
         GateDoor.SetActive(true);
         Destroy(gameObject.GetComponent<Collider2D>());

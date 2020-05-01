@@ -7,12 +7,6 @@ public class HelpScript : MonoBehaviour
     public GameObject HelpPanel, unlockText, HelpText, SolvedText;
     bool IsUnlocked = false;
     
-    // Start is called before the first frame update
-    void Start()
-    {
-  
-    }
-
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
@@ -37,15 +31,16 @@ public class HelpScript : MonoBehaviour
 
     public void unlockHelp()
     {
-        if(Player.Instance.coins >= 50)
+        if(Player.Instance.presistentData.Coins >= 50)
         {
-            Player.Instance.coins -= 50;
+            Player.Instance.presistentData.Coins -= 50;
             unlockText.gameObject.SetActive(false);
             HelpText.gameObject.SetActive(true);
             IsUnlocked = true;
         }
         else
         {
+            AudioManager.playNoMoney();
             ExitHelp();
         }
     }

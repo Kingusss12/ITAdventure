@@ -10,11 +10,12 @@ public class LivesScript : MonoBehaviour
         anim.Play("HeartPulsing", 0, Random.Range(0.0f, 1f));
     }
 
-    void OnTriggerEnter2D(Collider2D obj)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
-        if (obj.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player")
         {
-            Player.Instance.lives++;
+            AudioManager.playPlusLife();
+            Player.Instance.presistentData.Lives++;
             Destroy(gameObject);
             AudioManager.playCoinCollected();
         }

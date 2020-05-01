@@ -7,40 +7,19 @@ public class SceneLoaderScript : MonoBehaviour
 {
     public static SceneLoaderScript Instance;
     public PlayerData PlayerData;
-    public GameObject loadButton, newGameButton, oldStartButton;
 
-
-    private void Start()
-    {
-        PlayerData = SaverScript.LoadPlayer();
-        if (PlayerData.GameIsSaved == true || Player.Instance.gameIsSaved)
-        {
-            loadButton.SetActive(true);
-            newGameButton.SetActive(true);
-            Destroy(oldStartButton);
-        }
-    }
-
-    private void Update()
-    {
-        if (PlayerData.GameIsSaved == true || Player.Instance.gameIsSaved)
-        {
-            loadButton.SetActive(true);
-            newGameButton.SetActive(true);
-            Destroy(oldStartButton);
-        }
-    }
 
 
     public void Play()
     {
         SceneManager.LoadScene(1);
-        PlayerData = new PlayerData(5, 50, false, false, false, false, false, false, false);
+        PlayerData = new PlayerData(5, 50, false, false, false, false, false, false);
 
     }
 
     public void Awake()
     {
+
         Instance = this;
         DontDestroyOnLoad(gameObject);
     }
@@ -53,8 +32,10 @@ public class SceneLoaderScript : MonoBehaviour
 
     public void LoadPlayer()
     {
-        PlayerData = SaverScript.LoadPlayer();
+        PlayerData = PlayerData.Load();
         SceneManager.LoadScene(1);
 
     }
+
+    
 }
